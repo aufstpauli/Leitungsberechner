@@ -26,19 +26,20 @@ public abstract class FaktorF2Ermittler
      * @require häufung != null
      * @ensure int f2 != null
      */
-    public static int getFaktor(Häufung häufung)
+    public static double getFaktor(Häufung häufung)
     {
         assert häufung != null : "Vorbedingung verletzt: null";
         // erstelle die Tabelle
-        int[] tabelle = getTabelle();
+        double[] tabelle = getTabelle();
         // werte Tabelle aus
         int index = häufung.getIndex();
         return tabelle[index];
     }
 
-    private static int[] getTabelle()
+    private static double[] getTabelle()
     {
-        int i[] = {100,80,70,65,60,57,54,52,50,48,45,43,41,39,38};
+        double i[] = {1.00, 0.80, 0.70, 0.65, 0.60, 0.57, 0.54, 0.52, 0.50, 
+                        0.48, 0.45, 0.43, 0.41, 0.39, 0.38};
         return i;
     }
 }

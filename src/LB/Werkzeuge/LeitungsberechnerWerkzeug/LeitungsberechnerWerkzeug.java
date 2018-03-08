@@ -66,8 +66,8 @@ public class LeitungsberechnerWerkzeug
     private double _länge;
     private double _cosPhi;
     private double _q;
-    private int _f1;
-    private int _f2;
+    private double _f1;
+    private double _f2;
 
     /**
      * Konstruktor hier werden die Felder initialisiert und die Subwerkzeuge erstellt
@@ -197,11 +197,11 @@ public class LeitungsberechnerWerkzeug
         zeilenUmbruch();
         // f1 Anzeigen
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("f1: " + ((double) _f1) / 100 + "\t\t -> Ermittlung 1.2");
+            .append("f1: " + ((double) _f1) + "\t\t -> Ermittlung 1.2");
         zeilenUmbruch();
         // f2 Anzeigen
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("f2: " + ((double) _f2) / 100 + "\t\t -> Ermittlung 1.3");
+            .append("f2: " + ((double) _f2)  + "\t\t -> Ermittlung 1.3");
         zeilenUmbruch();
         // Ir Anzeigen
         _ergebnisanzeige.getErgebnisTextArea()

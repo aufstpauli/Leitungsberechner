@@ -27,7 +27,7 @@ public abstract class FaktorF1Ermittler
         // Variable für den Wert für die Rückgabe
         double f2;
         // Variable für die Tabelle
-        int[][] tabelle = getTabelle();
+        double[][] tabelle = getTabelle();
         
         // Ermittelt den Wert des Faktos anhand der Parameter
         f2 = tabelle[isolierung.getIndex()][temperatur.getIndex()];
@@ -48,17 +48,17 @@ public abstract class FaktorF1Ermittler
             {
                     // Gummi
                     {
-                        129,122,115,108,100,91,82,71,58
+                        1.29, 1.22, 1.15, 1.08, 1.00, 0.91, 82, 0.71, 0.58
                     },
                     
                     // PVC
                     {
-                        122,117,112,106,100,94,87,79,71,50
+                        1.22, 1.17, 1.12, 1.06, 1.00, 0.94, 0.87, 0.79, 0.71, 0.50
                     },
                     
                     // EPM
                     {
-                        118,114,110,105,100,95,89,84,77,63
+                        1.18, 1.14, 1.10, 1.05, 1.00, 0.95, 0.89, 0.84, 0.77, 0.63
                     }
             };
         return tabelle;

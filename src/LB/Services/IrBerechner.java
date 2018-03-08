@@ -16,8 +16,8 @@ public abstract class IrBerechner
      * Diese Methode Berechnet anhand der Temperaturfaktoren f1 und f2 die Strombelastbarkeit
      * der Leitung und gibt den Strom Iz zurück
      * @param Iz
-     * @param f1
-     * @param f2
+     * @param _f1
+     * @param _f2
      * @return Iz
      * 
      * @require  Strom != null
@@ -26,14 +26,14 @@ public abstract class IrBerechner
      * 
      * @ensure Iz != null
      */
-    public static Strom getIr(Strom Iz,int f1,int f2)
+    public static Strom getIr(Strom Iz,double _f1,double _f2)
     {
         assert Iz != null : "Vorbedingung verletzt: null";
-        assert f1>0 : "vorbedingung verletzt";
-        assert f2>0 : "vorbedingung verletzt"; 
+        assert _f1>0 : "vorbedingung verletzt";
+        assert _f2>0 : "vorbedingung verletzt"; 
         
         int milliAmpere =0;
-        milliAmpere = (int) Math.round( (Iz.getMilliAmpere() *10000) / (f1*f2));
+        milliAmpere = (int) Math.round( Iz.getMilliAmpere() / (_f1*_f2));
         return Strom.get(milliAmpere);
     }
 }
