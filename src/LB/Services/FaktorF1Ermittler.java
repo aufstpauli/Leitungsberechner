@@ -22,7 +22,7 @@ public abstract class FaktorF1Ermittler
      * @param temperatur
      * @return
      */
-    public static int getFaktor(Isolierung isolierung, Temperatur temperatur)
+    public static double getFaktor(Isolierung isolierung, Temperatur temperatur)
     {
         // Variable für den Wert für die Rückgabe
         int f2;
