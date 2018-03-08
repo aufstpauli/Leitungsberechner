@@ -25,7 +25,7 @@ public abstract class FaktorF1Ermittler
     public static double getFaktor(Isolierung isolierung, Temperatur temperatur)
     {
         // Variable für den Wert für die Rückgabe
-        int f2;
+        double f2;
         // Variable für die Tabelle
         int[][] tabelle = getTabelle();
         
@@ -42,9 +42,9 @@ public abstract class FaktorF1Ermittler
      * 
      * @ensure int tabelle !=null
      */
-    private static int[][] getTabelle()
+    private static double[][] getTabelle()
     {
-        int tabelle[][] = 
+        double tabelle[][] = 
             {
                     // Gummi
                     {
