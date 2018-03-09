@@ -4,9 +4,9 @@ import LB.Enum.Spannungsfall;
 import LB.Fachwerte.Spannung;
 
 /**
- * Diese Klasse stellt eine Methode zur Verfügung mit die den maximalen Spannungsfall
- * ausgiebt. Dafür wird die aktuelle Spannung und der Prozentualer Wert der maximalen
- * Spannung benötigt.
+ * Diese Klasse stellt eine Methode zur Verfügung mit der den maximalen Spannungsfall
+ * der Leitung ausgiebt. Dafür wird die aktuelle Spannung und der Prozentualer Wert 
+ * der maximalen Spannung benötigt.
  * 
  * @author cris
  * @version 14.12.2016
@@ -18,7 +18,7 @@ public abstract class Del_uErmittler
     /**
      * Diese Methode berechnet anhand des maximalen Prozentualen Spannungsfalls
      * Den maximalen Betrag an Spannungsfall.
-     * @param SPannung Ub
+     * @param Spannung Ub
      * @param Spannungsfall del_u
      * @return Spannung del_uMax
      * 

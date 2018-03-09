@@ -4,40 +4,44 @@ import LB.Enum.Sicherung;
 import LB.Fachwerte.Strom;
 
 /**
- * Diese Klasse stellt den Leistungsschutzschalter anhand des Betriebsstromes ib. Anhand
- * einer Tabelle wird automatisch ermittelt wie Groß die Strombelastbarkeit der Leitung
- * ist. Iz >= Ib es wird immer der nächst größere Stromwert ausgesucht
+ * Ein Exemplar dieser Klasse stellt den Leistungsschutzschalter dar. Anhand des Betriebsstromes
+ * ib wird automatisch ermittelt wie Groß die Strombelastbarkeit der Leitung
+ * ist. Iz >= Ib es wird immer der nächst größere Stromwert ausgesucht Dies geschieht gemäß
+ * der Regeln der DIn VDE Bestimmungen.
  * .
  * @author cris.
  * @version 08.08.2016
+ * @version 09.04.2018 - Kommentare Überarbeitet
  */
 public abstract class InErmittler
 {
 
     /**
-     * gibt den Strom der Strombelastbarkeit zurück
-     * @return Strom In
+     * Die Methode ermittelt den Nennstrom der Sicherung anhand des Betriebsstromes und 
+     * Art der Sicherung.
      * 
-     * @require betriebsStrom != null
-     * @require sicherung != null
-     * @ensure In != null
+     * @param Strom betriebsStrom
+     * @param Sicherung sicherung
+     * @return Strom IN
+     * 
+     * @require Strom betriebsStrom !=null!
+     * @require Sicherung sicherung !=null!
+     * 
+     * @ensure IN !=null!
      */
     public static Strom getSicherungNennstrom(Strom betriebsStrom, Sicherung sicherung)
     {
-        assert betriebsStrom != null : "Vorbedingung verletzt: null";
-        assert sicherung != null : "Vorbedingung verletzt: null";
+        assert betriebsStrom != null : "Vorbedingung verletzt: betriebsStrom !=null";
+        assert sicherung != null : "Vorbedingung verletzt: sicherung !=null";
         
-        return ermittelIZ(betriebsStrom,sicherung);
+        return ermittelIN(betriebsStrom,sicherung);
     }
 
 
     /**
      * Hilfsmethode zum ermitteln des Stromes
-     * @return Strom
-     * 
-     * @ensure Strom != null
      */
-    private static Strom ermittelIZ(Strom ib, Sicherung sicherung)
+    private static Strom ermittelIN(Strom ib, Sicherung sicherung)
     {
         Strom iN = Strom.get(0);
         if(sicherung == Sicherung.Leitungsschutzschalter)

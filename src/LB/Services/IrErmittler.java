@@ -4,12 +4,12 @@ import LB.Enum.Material;
 import LB.Enum.Verlegeart;
 import LB.Fachwerte.Strom;
 /**
- * Diese Klasse ist dafür da eine statische Methode zur Verfügung zu stellen, mit der 
- * mit Parametern die richtige Strombelastbarkeit ermittelt werden kann
+ * Diese Klasse stellt Methoden zur Strombelastbarkeit der Leitung zur Verfügung
  * 
  * @author cris
  * 
  * @version 10.10.2016
+ * @version 04.03.2018  - Kommentare Überarbeitet
  */
 
 public abstract class IrErmittler
@@ -17,12 +17,11 @@ public abstract class IrErmittler
     /**
      * Diese Methode ermittelt aus den Parametern die Strombelastbarkeit der Leitung
      * genutzt werden die Daten und aus der Tabelle DIN VDE 0298-4
-     * 30C° wird als standard angesehen
      * 
-     * @param material
-     * @param verlegeart
-     * @param drehstrom
-     * @param iB
+     * @param material material
+     * @param verlegeart verlegeart
+     * @param boolean istDrehstrom
+     * @param Strom iB
      * @return Strom Ir
      * 
      * @require material != null
@@ -35,9 +34,9 @@ public abstract class IrErmittler
                                 boolean drehstrom, Strom iB)
     {
         // Vertragsmodell
-        assert material != null : "Vorbedingung verletzt: null";
-        assert verlegeart != null : "Vorbedingung verletzt: null";
-        assert iB != null : "Vorbedingung verletzt: null";
+        assert material != null : "Vorbedingung verletzt: material!=null!";
+        assert verlegeart != null : "Vorbedingung verletzt: verlegeart!=null!";
+        assert iB != null : "Vorbedingung verletzt: iB!=null";
         
         
         // lädt die Tabelle zum ermitteln der Strombelastbarkeit
@@ -78,14 +77,21 @@ public abstract class IrErmittler
     }
 
     /**
-     *  Hilfsmethode zum erstellen der Tabelle aus der der Strombelastbarkeitswert ermittelt
-     *   wird
-     * @return
+     *  Diese Methode liefert eine Dreidimensionale Tabelle der Ströme in milleAmpare zurück.
+     *  
+     *  - Der erste Index steht für die Verlegeart
+     *  - Der zweite Index steht für die belastet Leitungen
+     *  - Der dritte Index steht für den Strom in mA
+     *  
+     * @return i [][][] 
+     * 
+     * @ensure int i 
      */
     public static int[][][] getTabelle()
     {
         // Dreidimensionales Array für die Tabelle zur Ermittlung der Strombelastbarkeit
-        int i [][][] = 
+        
+        int mA [][][] = 
             {
                  // A1
                     { 
@@ -199,6 +205,6 @@ public abstract class IrErmittler
                         }
                     }
             };
-        return i;
+        return mA;
     }
 }

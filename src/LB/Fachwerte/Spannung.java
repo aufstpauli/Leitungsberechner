@@ -1,7 +1,7 @@
 package LB.Fachwerte;
 
 /**
- * Mit einem Objekt dieser Klasse kann ein Abbild der elektrischen SPannung dargestellt
+ * Mit einem Exemplar dieser Klasse kann ein Abbild der elektrischen SPannung dargestellt
  * werden. Spannungen können verglichen, addiert, subtrahiert, multipliziert, dividiert
  * und abgefragt werden.
  * @author cris

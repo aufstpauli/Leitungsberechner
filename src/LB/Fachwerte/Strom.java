@@ -45,8 +45,6 @@ public final class Strom
      * Vergleicht ob beide den gleichen Wert haben
      * @param Strom strom
      * @return boolean
-     * 
-     * @require Strom strom !=null!
      */
     public boolean istGleich(Strom strom)
     {
@@ -59,8 +57,6 @@ public final class Strom
      * Vergleicht ob dessen Strom größer als dieser ist
      * @param Strom strom
      * @return boolean
-     * 
-     * @require Strom strom !=null!
      */
     public boolean istGrößer(Strom strom)
     {
@@ -73,8 +69,6 @@ public final class Strom
      * Vergleicht ob dessen Strom kleiner als dieser ist
      * @param Strom strom
      * @return boolean
-     * 
-     * @require Strom strom !=null!
      */
     public boolean istKleiner(Strom strom)
     {

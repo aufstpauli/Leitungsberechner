@@ -10,20 +10,30 @@ import LB.Enum.Temperatur;
  * @author cris
  * 
  * @version 10.10.2016
+ * @version 08.03.2018  - F1 von Integer zu Double umgewandelt
+ *                      - Kommentare überarbeitet
  *
  */
 public abstract class FaktorF1Ermittler
 {
     /**
-     * !!! Der Faktor wird als Integer geliefert und nicht als double, daher 
-     * muss das Ergebnis nach Nutzung durch 100 dividiert werden !!!
+     * Mit der Isolierung und der Temperatur wird der Faktor F2 ermittelt und 
+     * als double zurück gegeben.
      * 
-     * @param isolierung
-     * @param temperatur
-     * @return
+     * @param Isolierung isolierung
+     * @param Temperatur temperatur
+     * @return double f2
+     * 
+     * @require Isolierung isolierung != null!
+     * @require Temperatur temperatur != null!
+     * 
+     * @ensure double > 0
      */
     public static double getFaktor(Isolierung isolierung, Temperatur temperatur)
     {
+        assert isolierung != null:"Vorbedingung verletzt: isolierung!=null!";
+        assert temperatur !=null:"Vorbedingung verletzt: temperatur!=nulL!";
+        
         // Variable für den Wert für die Rückgabe
         double f2;
         // Variable für die Tabelle
@@ -38,9 +48,8 @@ public abstract class FaktorF1Ermittler
     /**
      * Hilfsmethode zum erstellen der Tabelle des Faktors für abweichende Temperatur
      * nach DIN VDE 0298-4
-     * @return int tabelle
+     * @return double tabelle
      * 
-     * @ensure int tabelle !=null
      */
     private static double[][] getTabelle()
     {

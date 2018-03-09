@@ -4,7 +4,7 @@ import LB.Fachwerte.Spannung;
 import LB.Fachwerte.Strom;
 
 /**
- * Diese Klasse berechnet den aktuellen Spannungsfall
+ * Diese Klasse stellt eine Methode zum Berechnen des aktuellen Spannungsfalls
  * 
  * @author cris
  * @version 14.12.2016
