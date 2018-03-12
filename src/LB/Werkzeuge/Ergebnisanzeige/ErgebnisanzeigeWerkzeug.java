@@ -3,6 +3,11 @@ package LB.Werkzeuge.Ergebnisanzeige;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+/**
+ * 
+ * @author cris
+ *
+ */
 public class ErgebnisanzeigeWerkzeug
 {
     ErgebnisanzeigeUI _ui;
