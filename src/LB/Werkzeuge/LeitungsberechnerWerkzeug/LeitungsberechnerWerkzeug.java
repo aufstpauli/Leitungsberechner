@@ -120,9 +120,19 @@ public class LeitungsberechnerWerkzeug
 
     private void prüfeUndKorrigiere()
     {
+        prüfeSpannungsfall();
+        // solange DELTA U <= DELTA U Max ist oder der Querschnitt 120qmm ist ...
+        while( (_dUMax.istGrößerAls(_dU) || _dUMax.istGleich(_dU)) && _q != 120.0) 
+        {
+            _q = AErmittler.nächtHöhererQuerschnitt(_q);
+            prüfeSpannungsfall();
+        }
+    }
+
+    private void prüfeSpannungsfall()
+    {
         _dUMax = Del_uErmittler.getDel_uMin(_ub, _spannungsfall);
         _dU = DelUBerechner.getDeltaU(_länge, _ib, _cosPhi, _q);
-
     }
 
     private void zeigeErgebnis()
@@ -192,30 +202,27 @@ public class LeitungsberechnerWerkzeug
 
         // In Anzeigen
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("In: " + _in.getStringFormatiert()
-                    + "\t\t -> Ermittlung 1.1");
+            .append("In: " + _in.getStringFormatiert());
         zeilenUmbruch();
         // f1 Anzeigen
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("f1: " + ((double) _f1) + "\t\t -> Ermittlung 1.2");
+            .append("f1: " + ((double) _f1));
         zeilenUmbruch();
         // f2 Anzeigen
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("f2: " + ((double) _f2)  + "\t\t -> Ermittlung 1.3");
+            .append("f2: " + ((double) _f2));
         zeilenUmbruch();
         // Ir Anzeigen
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("Ir " + _ir.getStringFormatiert()
-                    + "\t\t -> Berechnung 1.4");
+            .append("Ir " + _ir.getStringFormatiert());
         zeilenUmbruch();
         // Iz Anzeigen
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("Iz: " + IzBerechner.getIz(_in) + " A"
-                    + "\t\t -> Berechnung 1.5");
+            .append("Iz: " + IzBerechner.getIz(_in));
         zeilenUmbruch();
         // q Anzeigen
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("A/q: " + _q + " qmm" + "\t\t -> Ermittlung 1.6");
+            .append("A/q: " + _q + " qmm");
         zeilenUmbruch();
     }
 

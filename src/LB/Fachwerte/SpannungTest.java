@@ -263,9 +263,8 @@ public class SpannungTest
     {
         setup();
         // Korrektheitstest
-        //TODO
+        
         // Robustheitstest
-        //TODO
     }
     
     @Test
@@ -273,9 +272,8 @@ public class SpannungTest
     {
         setup();
         // Korrektheitstest
-        //TODO
+        
         // Robustheitstest
-        //TODO
     }
     
     @Test
@@ -283,9 +281,8 @@ public class SpannungTest
     {
         setup();
         // Korrektheitstest
-        //TODO
+        
         // Robustheitstest
-        //TODO
     }
     
 }

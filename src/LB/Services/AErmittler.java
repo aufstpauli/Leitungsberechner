@@ -10,8 +10,8 @@ import LB.Fachwerte.Strom;
  * @version unbekannt
  * @version 12.04.2018  - getA funktionsfähig
  *                      - Kommentare hinzugefügt
- *                      - Vertragsmodell hinzugeügt
- *                      - Methode nächtHöhererQuerschnitt hinzugefügt
+ *                      - Vertrag   smodell hinzugeügt
+ *                      - Methode nächstHöhererQuerschnitt hinzugefügt
  *
  */
 public abstract class AErmittler
@@ -76,9 +76,9 @@ public abstract class AErmittler
         double newQ = 1.5;
         double[] listQ = getTabelleQ();
 
-        for (int i = 11; i > 0; i--)
+        for (int i = 11; i >=0; --i)
         {
-            if( (q == listQ[i]) && (i <11))
+            if( (q == listQ[i]) && (i<11) )
             {
                 newQ = listQ[i+1];
             }
@@ -96,7 +96,7 @@ public abstract class AErmittler
                 95.0, 120.0};
         return d;
     }
-
+    
     /**
      * Diese Methode ermittelt anhand der Strombelastbarkeit der Leitung den 
      * Index mit dem dann der Querschnitt ermittelt werden kann.
