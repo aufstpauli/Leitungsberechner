@@ -20,7 +20,8 @@ import javax.swing.border.EtchedBorder;
 public class ErgebnisanzeigeUI
 {
     // private Variablen
-    private final static int width = 780;
+    private final static int WIDTH = 780;
+    private final static int HEIGHT = 155;
     private JPanel _hauptPanel;
     private JTextArea _ergebnisanzeige;
     
@@ -67,7 +68,7 @@ public class ErgebnisanzeigeUI
     private void erstelleHauptpanel()
     {
         _hauptPanel = new JPanel();
-        _hauptPanel.setPreferredSize(new Dimension(width, 180));
+        _hauptPanel.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         GridLayout gl = new GridLayout(1, 1);
         _hauptPanel.setLayout(gl);
         _hauptPanel.setBorder(new EtchedBorder());

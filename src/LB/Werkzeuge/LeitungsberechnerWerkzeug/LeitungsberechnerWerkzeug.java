@@ -34,7 +34,8 @@ import LB.Werkzeuge.Schritt4.Schritt4Werkzeug;
  * 
  * @author cris
  * @version 07.08.2016
- * @version 13.12.2016 Methoden optimiert
+ * @version 13.12.2016 - Methoden optimiert
+ * @version 17.04.2018 - Anzeige optimiert
  *
  */
 public class LeitungsberechnerWerkzeug
@@ -86,9 +87,10 @@ public class LeitungsberechnerWerkzeug
                     try
                     {
                         einlesenDerDaten();
+                        zeigeGegebenAn();
                         BerechnungUndErmittlung();
+                        zeigeBerechnungUndErmittlungAn();
                         prüfeUndKorrigiere();
-                        zeigeErgebnis();
                     }
                     catch (NumberFormatException e1)
                     {
@@ -121,12 +123,30 @@ public class LeitungsberechnerWerkzeug
     private void prüfeUndKorrigiere()
     {
         prüfeSpannungsfall();
+        zeigePrüfeUndKorrigiere();
+        
         // solange DELTA U <= DELTA U Max ist oder der Querschnitt 120qmm ist ...
         while( (_dUMax.istGrößerAls(_dU) || _dUMax.istGleich(_dU)) && _q != 120.0) 
         {
             _q = AErmittler.nächtHöhererQuerschnitt(_q);
             prüfeSpannungsfall();
+            zeilenUmbruch();
+            _ergebnisanzeige.getErgebnisTextArea()
+                .append("  " + "Setze q/A auf: \t" + _q);
+            zeilenUmbruch();
+            _ergebnisanzeige.getErgebnisTextArea()
+                .append("  " + "Delta U: \t \t" + _dU.getStringFormatiert());
+            zeilenUmbruch();
+            _ergebnisanzeige.getErgebnisTextArea()
+                .append("  " + "Delta U max.:\t" + _dUMax.getStringFormatiert());
+            zeilenUmbruch();
         }
+        zeilenUmbruch();
+        _ergebnisanzeige.getErgebnisTextArea()
+            .append("  " + "Zu wählender Querschnitt: \t" + _q +"mm²");
+        zeilenUmbruch();
+        _ergebnisanzeige.getErgebnisTextArea()
+            .append("  \t\t\t" + "======");
     }
 
     private void prüfeSpannungsfall()
@@ -135,12 +155,6 @@ public class LeitungsberechnerWerkzeug
         _dU = DelUBerechner.getDeltaU(_länge, _ib, _cosPhi, _q);
     }
 
-    private void zeigeErgebnis()
-    {
-        zeigeGegebenAn();
-        zeigeBerechnungUndErmittlungAn();
-        zeigePrüfeUndKorrigiere();
-    }
 
     private void zeigeGegebenAn()
     {
@@ -152,43 +166,49 @@ public class LeitungsberechnerWerkzeug
                     + "***********************");
         zeilenUmbruch();
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("Betriabsspannung: " + _ub + " V");
+            .append("  " + "Betriabsspannung: \t" + _ub + " V");
+        zeilenUmbruch();
+        if(_verkettungsfaktor) 
+        {
+            _ergebnisanzeige.getErgebnisTextArea()
+            .append("  " + "Verkettungsfaktor: \t" + "wird berücksichtigt");
+            zeilenUmbruch();
+        }
+        else 
+        {
+            _ergebnisanzeige.getErgebnisTextArea()
+            .append("  " + "Verkettungsfaktor: \t" + "wird nicht berücksichtigt");
+            zeilenUmbruch();
+        }
+        _ergebnisanzeige.getErgebnisTextArea()
+            .append("  " + "Ib: \t \t" + _ib.getStringFormatiert());
         zeilenUmbruch();
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("Verkettungsfaktor: " + _verkettungsfaktor);
+            .append("  " + "cosPhi: \t \t" + _cosPhi);
         zeilenUmbruch();
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("Ib: " + _ib.getStringFormatiert());
+            .append("  " + "Sicherung: \t \t" + _sicherung);
         zeilenUmbruch();
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("Ist CosPh: " + _isCosPhi);
+            .append("  " + "Leitungsmaterial: \t" + _material);
         zeilenUmbruch();
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("cosPhi: " + _cosPhi);
+            .append("  " + "Isolierung: \t \t" + _isolierung);
         zeilenUmbruch();
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("Sicherung: " + _sicherung);
+            .append("  " + "Verlegungsart: \t" + _verlegeart);
         zeilenUmbruch();
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("Leitungsmaterial: " + _material);
+            .append("  " + "Häufung: \t \t" + _häufung);
         zeilenUmbruch();
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("Isolierung: " + _isolierung);
+            .append("  " + "Temperatur: \t" + _temperatur);
         zeilenUmbruch();
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("Verlegungsart: " + _verlegeart);
+            .append("  " + "Spannungsfall: \t" + _spannungsfall);
         zeilenUmbruch();
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("Häufung: " + _häufung);
-        zeilenUmbruch();
-        _ergebnisanzeige.getErgebnisTextArea()
-            .append("Temperatur: " + _temperatur);
-        zeilenUmbruch();
-        _ergebnisanzeige.getErgebnisTextArea()
-            .append("Spannungsfall: " + _spannungsfall);
-        zeilenUmbruch();
-        _ergebnisanzeige.getErgebnisTextArea()
-            .append("Länge: " + _länge + " m");
+            .append("  " + "Länge: \t \t" + _länge + " m");
         zeilenUmbruch();
     }
 
@@ -202,27 +222,27 @@ public class LeitungsberechnerWerkzeug
 
         // In Anzeigen
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("In: " + _in.getStringFormatiert());
+            .append("  " + "In: \t \t" + _in.getStringFormatiert());
         zeilenUmbruch();
         // f1 Anzeigen
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("f1: " + ((double) _f1));
+            .append("  " + "f1: \t \t" + ((double) _f1));
         zeilenUmbruch();
         // f2 Anzeigen
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("f2: " + ((double) _f2));
+            .append("  " + "f2: \t \t" + ((double) _f2));
         zeilenUmbruch();
         // Ir Anzeigen
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("Ir " + _ir.getStringFormatiert());
+            .append("  " + "Ir: \t \t" + _ir.getStringFormatiert());
         zeilenUmbruch();
         // Iz Anzeigen
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("Iz: " + IzBerechner.getIz(_in));
+            .append("  " + "Iz: \t \t" + IzBerechner.getIz(_in));
         zeilenUmbruch();
         // q Anzeigen
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("A/q: " + _q + " qmm");
+            .append("  " + "A/q: \t \t" + _q + " qmm");
         zeilenUmbruch();
     }
 
@@ -234,10 +254,10 @@ public class LeitungsberechnerWerkzeug
                     + "Korrigiere:******************");
         zeilenUmbruch();
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("Delta U: \t" + _dU.getStringFormatiert());
+            .append("  " + "Delta U: \t \t" + _dU.getStringFormatiert());
         zeilenUmbruch();
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("Delta U max.:\t" + _dUMax.getStringFormatiert());
+            .append("  " + "Delta U max.:\t" + _dUMax.getStringFormatiert());
         zeilenUmbruch();
     }
 

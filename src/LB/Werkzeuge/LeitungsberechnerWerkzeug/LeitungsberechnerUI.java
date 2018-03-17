@@ -10,6 +10,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  * Diese Klasse gestaltet das Loyout des Hauptfensters. Es wird ein Heuptpanel erstellt in
@@ -18,10 +19,14 @@ import javax.swing.JPanel;
  * 
  * @author cris
  * @version 07.08.2016
+ * @version 17.04.2018 - Fenstergröße optimiert
  */
 public class LeitungsberechnerUI
 {
     private static final String TITEL = "Leitungsberechner   VB1.0";
+    private final int WIDTH = 810;
+    private final int HEIGHT = 750;
+    
     private JFrame _hauptFenster;
     private JPanel _hauptPanel;
     private JPanel _schließerPanel;
@@ -31,6 +36,8 @@ public class LeitungsberechnerUI
     private JPanel _schritt3;
     private JPanel _schritt4;
     private JPanel _ergebnisanzeige;
+    
+
     
     /**
      * Konstruktor hier werden die Subpanel als Paramter übergeben und anschließend alle
@@ -93,7 +100,8 @@ public class LeitungsberechnerUI
      */
     private void fülleHauptfenster()
     {
-        _hauptFenster.add(_hauptPanel,BorderLayout.CENTER);
+        JScrollPane scrollpane = new JScrollPane(_hauptPanel);
+        _hauptFenster.add(scrollpane);
         _hauptFenster.add(_schließerPanel,BorderLayout.SOUTH);
     }
 
@@ -115,9 +123,10 @@ public class LeitungsberechnerUI
     private void hauptfensterFrameInit()
     {
         _hauptFenster = new JFrame(TITEL);
-        _hauptFenster.setSize(800, 1024);
+        _hauptFenster.setMinimumSize(new Dimension(WIDTH, HEIGHT));
         _hauptFenster.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         _hauptFenster.getContentPane().setLayout(new BorderLayout());
+        _hauptFenster.setLocationRelativeTo(null);
     }
     
     /**
