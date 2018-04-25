@@ -1,5 +1,7 @@
 package LB.Startup;
 
+import java.util.Properties;
+
 import javax.swing.SwingUtilities;
 
 import LB.Werkzeuge.LeitungsberechnerWerkzeug.LeitungsberechnerWerkzeug;
@@ -20,6 +22,11 @@ public class StartLeitungsberechner
             public void run()
             {
                 new LeitungsberechnerWerkzeug();
+                
+                Properties prop = System.getProperties( );
+                System.out.println(prop.getProperty("os.name")); //Windows XP
+                System.out.println(prop.getProperty("os.arch")); //x86
+                System.out.println(prop.getProperty("os.version")); //5.1
             }
         });
     }

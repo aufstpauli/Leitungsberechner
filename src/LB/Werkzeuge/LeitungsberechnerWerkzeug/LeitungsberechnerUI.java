@@ -23,7 +23,7 @@ import javax.swing.JScrollPane;
  */
 public class LeitungsberechnerUI
 {
-    private static final String TITEL = "Leitungsberechner   VB1.0";
+    private static final String TITEL = "Leitungsberechner   V1.01";
     private final int WIDTH = 810;
     private final int HEIGHT = 750;
     

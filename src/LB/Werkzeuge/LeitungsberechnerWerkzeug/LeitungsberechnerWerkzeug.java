@@ -36,6 +36,10 @@ import LB.Werkzeuge.Schritt4.Schritt4Werkzeug;
  * @version 07.08.2016
  * @version 13.12.2016 - Methoden optimiert
  * @version 17.04.2018 - Anzeige optimiert
+ * @version 09.04.2018 - Anzeige für das CosPhi verbessert
+ * @version 25.04.2018 - Prüfe und Kontrolle überarbeitet -> Es wird nun korregt
+ *                          angezeigt, wenn der Spannungsfall zu hoch ist, dass
+ *                          dann der Querschnitt nicht ausreicht.
  *
  */
 public class LeitungsberechnerWerkzeug
@@ -102,6 +106,10 @@ public class LeitungsberechnerWerkzeug
         _ui.zeigeFenster();
     }
 
+    /**
+     * Erst werden alle Eingegeben Daten ermittelt und anschließend werden die
+     * Berechnungen durchgeführt.
+     */
     private void BerechnungUndErmittlung()
     {
         // Nennstrom der Sicherung In
@@ -120,6 +128,13 @@ public class LeitungsberechnerWerkzeug
         _q = AErmittler.getA(_material, _verlegeart, _verkettungsfaktor, _ir);
     }
 
+    /**
+     * Prüft ob bei der Länge der Leitung der maximale Spannungsfall nicht
+     * unterschritten wird. Falls doch, so wird der Querschnitt automatisch 
+     * um den nächst größeren erhöht und erneut geprüft. Es wird solange Geprüft,
+     * bis der höchste Querschnitt erreicht wird, oder der der Spannungsfall 
+     * kleiner ist als, der maximal Wert. 
+     */
     private void prüfeUndKorrigiere()
     {
         prüfeSpannungsfall();
@@ -141,14 +156,28 @@ public class LeitungsberechnerWerkzeug
                 .append("  " + "Delta U max.:\t" + _dUMax.getStringFormatiert());
             zeilenUmbruch();
         }
-        zeilenUmbruch();
-        _ergebnisanzeige.getErgebnisTextArea()
+        // Wenn der höchste Querschnitt nicht ausreicht...
+        if (_dUMax.istGrößerAls(_dU) && _q == 120.0 )
+        {
+            zeilenUmbruch();
+            _ergebnisanzeige.getErgebnisTextArea()
+            .append("  " + "Es gibt keinen geeigneten Querschnitt. Bitte die Länge "
+                    + " prüfen");
+        }
+        else
+        {
+            zeilenUmbruch();
+            _ergebnisanzeige.getErgebnisTextArea()
             .append("  " + "Zu wählender Querschnitt: \t" + _q +"mm²");
-        zeilenUmbruch();
-        _ergebnisanzeige.getErgebnisTextArea()
-            .append("  \t\t\t" + "======");
+            zeilenUmbruch();
+            _ergebnisanzeige.getErgebnisTextArea()
+            .append("  \t\t\t" + "======");            
+        }
     }
 
+    /**
+     * Überprüft, ob der Spannungsfall nicht höher ist, als zulässig
+     */
     private void prüfeSpannungsfall()
     {
         _dUMax = Del_uErmittler.getDel_uMin(_ub, _spannungsfall);
@@ -156,35 +185,34 @@ public class LeitungsberechnerWerkzeug
     }
 
 
+    /**
+     * Gibt Zeigt die Daten an, die ausgewählt werden, damit das Ergebnis
+     * überprüft werden kann.
+     */
     private void zeigeGegebenAn()
     {
         zeilenUmbruch();
         _ergebnisanzeige.getErgebnisTextArea()
             .setText("");
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("******************** Gegeben: "
-                    + "***********************");
+            .append("******************** Gegeben: ***********************");
         zeilenUmbruch();
         _ergebnisanzeige.getErgebnisTextArea()
             .append("  " + "Betriabsspannung: \t" + _ub + " V");
         zeilenUmbruch();
-        if(_verkettungsfaktor) 
+        _ergebnisanzeige.getErgebnisTextArea()
+            .append("  " + "Ib: \t \t" + _ib.getStringFormatiert());
+        zeilenUmbruch();
+        if(_isCosPhi) 
         {
             _ergebnisanzeige.getErgebnisTextArea()
-            .append("  " + "Verkettungsfaktor: \t" + "wird berücksichtigt");
-            zeilenUmbruch();
+            .append("  " + "cosPhi: \t \t" + "Wird berücksichtigt :" + _cosPhi);            
         }
         else 
         {
             _ergebnisanzeige.getErgebnisTextArea()
-            .append("  " + "Verkettungsfaktor: \t" + "wird nicht berücksichtigt");
-            zeilenUmbruch();
-        }
-        _ergebnisanzeige.getErgebnisTextArea()
-            .append("  " + "Ib: \t \t" + _ib.getStringFormatiert());
-        zeilenUmbruch();
-        _ergebnisanzeige.getErgebnisTextArea()
-            .append("  " + "cosPhi: \t \t" + _cosPhi);
+            .append("  " + "cosPhi: \t \t" + "Wird nicht berücksichtigt");
+        }       
         zeilenUmbruch();
         _ergebnisanzeige.getErgebnisTextArea()
             .append("  " + "Sicherung: \t \t" + _sicherung);
@@ -212,6 +240,9 @@ public class LeitungsberechnerWerkzeug
         zeilenUmbruch();
     }
 
+    /**
+     * Zeigt die Ergebnisse der Berechnungen an.
+     */
     private void zeigeBerechnungUndErmittlungAn()
     {
         zeilenUmbruch();
@@ -246,6 +277,9 @@ public class LeitungsberechnerWerkzeug
         zeilenUmbruch();
     }
 
+    /**
+     * Zeigt die Ergebnisse der Kontrolle an
+     */
     private void zeigePrüfeUndKorrigiere()
     {
         zeilenUmbruch();
@@ -261,12 +295,18 @@ public class LeitungsberechnerWerkzeug
         zeilenUmbruch();
     }
 
+    /**
+     * Fügt einen Zeilenumbruch bei der Anzeige durch
+     */
     private void zeilenUmbruch()
     {
         _ergebnisanzeige.getErgebnisTextArea()
             .append("\n");
     }
 
+    /**
+     * Liest die Daten der Eingabekomponenten aus
+     */
     private void einlesenDerDaten()
     {
         // Spannung U

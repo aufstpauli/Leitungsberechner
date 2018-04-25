@@ -58,7 +58,6 @@ public abstract class AErmittler
         return q;
     }
 
-    //TODO ungetestet!
     /**
      * Diese Methode ermittelt den nächst Höheren Wert von dem Angegeben 
      * Querschnitt.
