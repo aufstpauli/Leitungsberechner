@@ -11,7 +11,7 @@ package LB.Enum;
  */
 public enum Material
 {
-    Kupfer("Kupfer(CU)",0),
+    Kupfer("Kupfer (CU)",0),
     Aluminuim("Aluminium (Al)",1);
     
     // globale Variable für den Text

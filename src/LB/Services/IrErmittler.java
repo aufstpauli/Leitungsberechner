@@ -159,7 +159,8 @@ public abstract class IrErmittler
                         // Drei belastete Leitungen
                         {
                                 15000, 20000, 27000, 34000, 46000, 62000, 80000,
-                                99000, 118000, 149000, 179000, 206
+                                99000, 118000, 149000, 179000, 2060000
+                                //TODO letzen Wert checken
                         }
                     },
                     
