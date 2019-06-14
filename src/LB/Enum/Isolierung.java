@@ -8,6 +8,8 @@ package LB.Enum;
  * @version 11.10.2016
  * @version11.02.2018 - Vertragsmodell genau umgesetzt
  *
+ *
+ *
  */
 public enum Isolierung
 {
