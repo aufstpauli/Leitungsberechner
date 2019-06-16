@@ -23,7 +23,7 @@ import javax.swing.JScrollPane;
  */
 public class LeitungsberechnerUI
 {
-    private static final String TITEL = "Leitungsberechner   V1.01";
+    private static final String TITEL = "Leitungsberechner   V1.02";
     private final int WIDTH = 810;
     private final int HEIGHT = 750;
     
@@ -76,7 +76,7 @@ public class LeitungsberechnerUI
         JPanel hilfspanel = new JPanel();
         hilfspanel.setLayout(new BoxLayout(hilfspanel,BoxLayout.Y_AXIS));
         _hauptPanel.setAlignmentX(Component.CENTER_ALIGNMENT);        
-        fülleHauptPanel(hilfspanel);        
+        fülleHilfsPanel(hilfspanel);        
         _hauptPanel.add(hilfspanel);
     }
 
@@ -85,7 +85,7 @@ public class LeitungsberechnerUI
      * in das Hauptpanel erscheinen und die Größe wird nie verändert
      * @param hilfspanel
      */
-    private void fülleHauptPanel(JPanel hilfspanel)
+    private void fülleHilfsPanel(JPanel hilfspanel)
     {
         hilfspanel.add(_schritt1);
         hilfspanel.add(_schritt2);

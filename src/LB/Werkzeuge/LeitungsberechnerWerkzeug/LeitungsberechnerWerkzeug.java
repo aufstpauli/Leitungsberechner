@@ -171,7 +171,7 @@ public class LeitungsberechnerWerkzeug
             .append("  " + "Zu wählender Querschnitt: \t" + _q +"mm²");
             zeilenUmbruch();
             _ergebnisanzeige.getErgebnisTextArea()
-            .append("  \t\t\t" + "======");            
+            .append("  \t\t" + "======");            
         }
     }
 
@@ -230,7 +230,7 @@ public class LeitungsberechnerWerkzeug
             .append("  " + "Häufung: \t \t" + _häufung);
         zeilenUmbruch();
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("  " + "Temperatur: \t" + _temperatur);
+            .append("  " + "Temperatur: \t \t" + _temperatur);
         zeilenUmbruch();
         _ergebnisanzeige.getErgebnisTextArea()
             .append("  " + "Spannungsfall: \t" + _spannungsfall);
@@ -291,7 +291,7 @@ public class LeitungsberechnerWerkzeug
             .append("  " + "Delta U: \t \t" + _dU.getStringFormatiert());
         zeilenUmbruch();
         _ergebnisanzeige.getErgebnisTextArea()
-            .append("  " + "Delta U max.:\t" + _dUMax.getStringFormatiert());
+            .append("  " + "Delta U max.: \t" + _dUMax.getStringFormatiert());
         zeilenUmbruch();
     }
 

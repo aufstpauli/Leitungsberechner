@@ -94,6 +94,7 @@ public class Schritt2UI
         _materialComboBox = new JComboBox<Material>();
         // fülle die ComboBox mit dem Enum Material
         _materialComboBox.setModel(new DefaultComboBoxModel<Material>(Material.values()));
+        _materialComboBox.setEnabled(false);
         return spaltenLabel;
     }
     
