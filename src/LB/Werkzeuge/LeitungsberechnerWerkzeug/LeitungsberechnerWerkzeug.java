@@ -153,7 +153,7 @@ public class LeitungsberechnerWerkzeug
                 .append("  " + "Delta U: \t \t" + _dU.getStringFormatiert());
             zeilenUmbruch();
             _ergebnisanzeige.getErgebnisTextArea()
-                .append("  " + "Delta U max.:\t" + _dUMax.getStringFormatiert());
+                .append("  " + "Delta U max.:\t \t" + _dUMax.getStringFormatiert());
             zeilenUmbruch();
         }
         // Wenn der höchste Querschnitt nicht ausreicht...
